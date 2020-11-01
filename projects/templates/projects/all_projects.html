@@ -1,0 +1,42 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Projects</h1>
+    <!-- <h1>hello again!</h1> -->
+    <!-- 
+        render the projects from views ~ use Dango's { { variable }} syntax to print the projects
+   {{ projects }}
+    -->
+    
+<!-- use code logic to iterate over the projects variable passed in from views
+using Django's %codelogic% syntax -->
+        <div class="row">
+        {% for project in projects %}
+            <div class="col-md-4">
+                <div class="card mb-2">
+                    <img class="card-img-top" src="{% static project.image %}" alt="screenshot of {{project.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                        <!-- point to app_name projects that is inside urls.py path to create proper amespace
+                        uniquely ID the View with the Django %url % -->
+                        <a href="{% url 'projects:project_detail' project.pk %}" class="btn btn-primary">See More</a>
+                        <p>Tech: {{ project.technology }}</p>
+                    </div>
+                </div>
+            </div>
+<!-- close the for loop with the %endfor% statement -->
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
